@@ -10,6 +10,7 @@ class ModuleInfo extends EventEmitter {
         this.el = document.querySelector('.node-info');
 
         this.elements();
+        this.listeners();
 
         this.module = {};
     }
@@ -18,6 +19,11 @@ class ModuleInfo extends EventEmitter {
         this.name = this.el.querySelector('.node-name');
         this.description = this.el.querySelector('.node-description');
         this.exports = this.el.querySelector('.node-exports');
+        this.hideBtn = this.el.querySelector('.node-info__hide');
+    }
+
+    listeners() {
+        this.hideBtn.addEventListener('click', this.hide.bind(this));
     }
 
     show(module) {

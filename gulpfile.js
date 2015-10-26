@@ -7,6 +7,8 @@ var $ = require('requirist')(
     'gulp',
     'gulp-util as gutil',
     'gulp-jade as jade',
+    'gulp-concat as concat',
+    'gulp-less as less',
     'esprima',
     'webpack',
 
@@ -46,6 +48,13 @@ $.gulp.task('scripts', function(done) {
     });
 });
 
+$.gulp.task('styles', function() {
+    $.gulp.src('./src/*.less')
+        .pipe($.less())
+        .pipe($.concat('main.css'))
+        .pipe($.gulp.dest('./dist/'));
+});
+
 $.gulp.task('layouts', function() {
     $.gulp.src('./src/*.jade')
         .pipe($.jade())
@@ -55,6 +64,7 @@ $.gulp.task('layouts', function() {
 $.gulp.task('watch', function(done) {
     $.gulp.watch('./src/**/*.js', ['scripts']);
     $.gulp.watch('./src/*.jade', ['layouts']);
+    $.gulp.watch('./src/*.less', ['styles']);
 });
 
-$.gulp.task('default', ['scripts', 'layouts', 'diagram', 'watch']);
+$.gulp.task('default', ['scripts', 'layouts', 'styles', 'diagram', 'watch']);

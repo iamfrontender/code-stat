@@ -156,6 +156,7 @@ class Graph {
 
     select(node) {
         ModuleInfo.module = this.graph.getModule(node.name);
+        ModuleInfo.show();
     }
 
     resize() {
